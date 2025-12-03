@@ -1,492 +1,217 @@
-# Omni-Publisher Content Ecosystem
+# OmniDistro-Content-Publishing-Engine-TypeScript-CLI
 
-A comprehensive content publishing platform that automatically distributes blog posts across multiple platforms including Dev.to, Hashnode, Medium, WordPress, Ghost, Blogger, Tumblr, and Wix. Built with TypeScript and designed for content creators who want to maximize their reach.
+![Build Status](https://img.shields.io/github/actions/workflow/user/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI/ci.yml?style=flat-square&logo=github)
+![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI?style=flat-square&logo=codecov)
+![Tech Stack](https://img.shields.io/badge/TechStack-TypeScript%2CVite%2CTailwindCSS%2CTauri-blue?style=flat-square)
+![Linting](https://img.shields.io/badge/Linting-Biome-red?style=flat-square)
+![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange?style=flat-square)
+![GitHub Stars](https://img.shields.io/github/stars/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI?style=flat-square&logo=github)
 
-## 🚀 Features
+**Effortlessly distribute your content across multiple platforms (Dev.to, Hashnode, Medium, WordPress, Ghost, Blogger, Tumblr, Wix) with this comprehensive TypeScript CLI engine, maximizing reach and streamlining creator workflows.**
 
-- **Multi-Platform Publishing**: Publish to 8+ platforms simultaneously
-- **Static Site Generation**: Beautiful, responsive website with your content
-- **GitHub Integration**: Automated publishing via GitHub Actions
-- **Content Management**: Markdown-based content with frontmatter support
-- **Idempotent Publishing**: Smart tracking prevents duplicate posts
-- **Mock Testing**: Complete test suite with mock APIs
-- **Community Submissions**: GitHub Issues integration for content submissions
+--- 
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Quick Start](#quick-start)
-- [Local Development](#local-development)
-- [Configuration](#configuration)
-- [Publishing Platforms](#publishing-platforms)
-- [Content Creation](#content-creation)
-- [GitHub Actions](#github-actions)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
-- [Security](#security)
-- [Contributing](#contributing)
+*   [Overview](#overview)
+*   [Key Features](#key-features)
+*   [Architecture](#architecture)
+*   [AI Agent Directives](#ai-agent-directives)
+*   [Development Setup](#development-setup)
+*   [Contributing](#contributing)
+*   [License](#license)
+*   [Star ⭐ This Repo](#star--this-repo)
 
-## 🚀 Quick Start
+--- 
+
+## Overview
+
+OmniDistro is a robust command-line interface (CLI) tool built with TypeScript, designed to automate the complex task of publishing content to a wide array of popular blogging and content platforms. It empowers creators to focus on writing by handling the distribution complexities, ensuring their message reaches the widest possible audience with minimal manual effort.
+
+--- 
+
+## Key Features
+
+*   **Multi-Platform Support:** Seamlessly publish to Dev.to, Hashnode, Medium, WordPress, Ghost, Blogger, Tumblr, and Wix.
+*   **TypeScript Powered:** Leverages TypeScript for enhanced type safety, code maintainability, and developer productivity.
+*   **Vite Integration:** Utilizes Vite for a blazing-fast development experience and optimized build process.
+*   **Tailwind CSS:** Incorporates Tailwind CSS for rapid UI development and consistent styling (if UI elements are introduced).
+*   **Tauri Framework:** Enables the creation of fast, reliable, and secure desktop applications using web technologies.
+*   **Extensible Architecture:** Designed for easy addition of new platforms and features.
+*   **Configuration Driven:** Manage publishing settings and credentials through a flexible configuration system.
+
+--- 
+
+## Architecture
+
+This project follows a modern, modular architecture, heavily influenced by Feature-Sliced Design (FSD) principles for web applications, adapted for a CLI context. This ensures scalability, maintainability, and clear separation of concerns.
+
+mermaid
+graph TD
+    A[CLI Entrypoint] --> B(Configuration Loader)
+    A --> C(Platform Adapters)
+    B --> D{Content Processor}
+    C --> D
+    D --> E(Publisher Module)
+    E --> F1[Dev.to API]
+    E --> F2[Hashnode API]
+    E --> F3[Medium API]
+    E --> F4[WordPress API]
+    E --> F5[Ghost API]
+    E --> F6[Blogger API]
+    E --> F7[Tumblr API]
+    E --> F8[Wix API]
+
+
+*   **CLI Entrypoint:** The main `index.ts` file that orchestrates the application flow.
+*   **Configuration Loader:** Manages loading user configurations, API keys, and platform-specific settings.
+*   **Platform Adapters:** Encapsulates the logic for interacting with each specific content platform's API.
+*   **Content Processor:** Handles content transformation, sanitization, and preparation for publishing.
+*   **Publisher Module:** Orchestrates the publishing process by invoking the appropriate platform adapters.
+
+--- 
+
+## 🤖 AI Agent Directives
+
+<details>
+<summary>Click to expand AI Agent Directives</summary>
+
+## SYSTEM: APEX TECHNICAL AUTHORITY & ELITE ARCHITECT (DECEMBER 2025 EDITION)
+
+### 1. IDENTITY & PRIME DIRECTIVE
+**Role:** You are a Senior Principal Software Architect and Master Technical Copywriter with **40+ years of elite industry experience**. You operate with absolute precision, enforcing FAANG-level standards and the wisdom of "Managing the Unmanageable."
+**Context:** Current Date is **December 2025**. You are building for the 2026 standard.
+**Output Standard:** Deliver **EXECUTION-ONLY** results. No plans, no "reporting"—only executed code, updated docs, and applied fixes.
+**Philosophy:** "Zero-Defect, High-Velocity, Future-Proof."
+
+---
+
+### 2. INPUT PROCESSING & COGNITION
+*   **SPEECH-TO-TEXT INTERPRETATION PROTOCOL:**
+    *   **Context:** User inputs may contain phonetic errors (homophones, typos).
+    *   **Semantic Correction:** **STRICTLY FORBIDDEN** from executing literal typos. You must **INFER** technical intent based on the project context.
+    *   **Logic Anchor:** Treat the `README.md` as the **Single Source of Truth (SSOT)**.
+*   **MANDATORY MCP INSTRUMENTATION:**
+    *   **No Guessing:** Do not hallucinate APIs.
+    *   **Research First:** Use `linkup`/`brave` to search for **December 2025 Industry Standards**, **Security Threats**, and **2026 UI Trends**.
+    *   **Validation:** Use `docfork` to verify *every* external API signature.
+    *   **Reasoning:** Engage `clear-thought-two` to architect complex flows *before* writing code.
+
+---
+
+### 3. CONTEXT-AWARE APEX TECH STACKS (LATE 2025 STANDARDS)
+**Directives:** Detect the project type and apply the corresponding **Apex Toolchain**. This repository, `OmniDistro-Content-Publishing-Engine-TypeScript-CLI`, is a TypeScript-based CLI tool.
+
+*   **PRIMARY SCENARIO A: WEB / APP / EXTENSION (TypeScript)**
+    *   **Stack:** TypeScript 6.x (Strict), Vite 7 (Rolldown), TailwindCSS v4, Tauri v2.x. 
+    *   **Lint/Test:** Biome (Speed) + Vitest (Unit) + Playwright (E2E).
+    *   **Architecture:** Feature-Sliced Design (FSD), adapted for CLI context.
+    *   **CLI Framework:** `Commander.js` or similar for robust CLI parsing.
+
+---
+
+### 4. APEX NAMING CONVENTION (THE "STAR VELOCITY" ENGINE)
+A high-performing name must instantly communicate **Product**, **Function**, **Platform** and **Type**.
+
+**Formula:** `<Product-Name>-<Primary-Function>-<Platform>-<Type>`
+**Format:** `Title-Case-With-Hyphens`
+
+---
+
+### 5. THE README REPLICATION PROTOCOL (THE ULTIMATE ARTIFACT)
+The README is a self-contained **Project Operating System**.
+
+**Required Sections:**
+1.  **VISUAL AUTHORITY (Above the Fold):** Hero Banner/Logo, Live Badges (Shields.io, `flat-square`, `chirag127`), Social Proof.
+2.  **STRUCTURAL CLARITY:** BLUF, Architecture Diagram (Mermaid/ASCII tree), Table of Contents.
+3.  **🤖 AI AGENT DIRECTIVES (CRITICAL):** Collapsible `<details>` block, content aligned with AGENTS.md.
+4.  **DEVELOPMENT STANDARDS:** Setup, Scripts, Principles (SOLID, DRY, YAGNI).
+
+---
+
+### 6. CHAIN OF THOUGHT (CoT) PROTOCOL
+Before generating JSON, perform deep analysis in `<thinking>` block: Audit, Pivot/Archive Decision, Naming Strategy, Replication Protocol, File Generation, Final Polish, Strict Adherence.
+
+---
+
+### 7. DYNAMIC URL & BADGE PROTOCOL
+**Mandate:** All generated files MUST use the correct dynamic URLs based on the **New Repository Name** (`https://github.com/chirag127/<New-Repo-Name>`).
+
+</details>
+
+--- 
+
+## Development Setup
 
 ### Prerequisites
 
-- Node.js 18+ ([install via nvm](https://github.com/nvm-sh/nvm))
-- GitHub account with repository access
+*   Node.js v18+ or v20+ recommended
+*   npm or yarn
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/omni-publisher-content-ecosystem.git
-   cd omni-publisher-content-ecosystem
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   # Edit .env.local with your API keys
-   ```
-
-4. **Build and test**
-   ```bash
-   npm run build
-   npm test
-   ```
-
-5. **Generate your site**
-   ```bash
-   npm run build-site
-   ```
-
-## 💻 Local Development
-
-### Development Workflow
-
-1. **Start development mode**
-   ```bash
-   npm run dev
-   ```
-
-2. **Test with mock APIs**
-   ```bash
-   npm run mock-server
-   # In another terminal:
-   npm run publish -- --mock --dry-run
-   ```
-
-3. **Build for production**
-   ```bash
-   npm run build
-   npm run publish -- --dry-run
-   ```
-
-### Project Structure
-
-```
-├── .github/workflows/     # GitHub Actions
-├── config/               # Configuration files
-├── content/posts/        # Markdown blog posts
-├── public/               # Generated static site
-├── scripts/              # Utility scripts
-├── src/
-│   ├── adapters/         # Platform-specific publishers
-│   ├── utils/           # Shared utilities
-│   ├── build-site.ts    # Static site generator
-│   └── publish.ts       # Main publisher CLI
-├── .env.example         # Environment template
-├── .postmap.json        # Publication tracking
-└── package.json         # Dependencies and scripts
-```
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-Copy `.env.example` to `.env.local` and configure:
-
-```bash
-# Dev.to API Key
-DEVTO_API_KEY=your_devto_api_key_here
-
-# Hashnode Personal Access Token
-HASHNODE_TOKEN=your_hashnode_token_here
-
-# Medium Integration Token
-MEDIUM_INTEGRATION_TOKEN=your_medium_integration_token_here
-
-# WordPress.com Access Token and Site
-WP_ACCESS_TOKEN=your_wordpress_access_token_here
-WP_SITE=your_wordpress_site_url_here
-
-# Ghost Admin API
-GHOST_ADMIN_API_KEY=your_ghost_admin_api_key_here
-GHOST_ADMIN_URL=your_ghost_admin_url_here
-
-# Google Blogger
-BLOGGER_OAUTH_TOKEN=your_blogger_oauth_token_here
-BLOGGER_BLOG_ID=your_blogger_blog_id_here
-
-# Tumblr OAuth
-TUMBLR_CONSUMER_KEY=your_tumblr_consumer_key_here
-TUMBLR_CONSUMER_SECRET=your_tumblr_consumer_secret_here
-TUMBLR_TOKEN=your_tumblr_token_here
-TUMBLR_TOKEN_SECRET=your_tumblr_token_secret_here
-TUMBLR_BLOG_IDENTIFIER=your_tumblr_blog_identifier_here
+1.  **Clone the repository:**
+    bash
+    git clone https://github.com/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI.git
+    cd OmniDistro-Content-Publishing-Engine-TypeScript-CLI
+    
 
-# Wix API
-WIX_API_TOKEN=your_wix_api_token_here
-WIX_SITE_ID=your_wix_site_id_here
+2.  **Install dependencies:**
+    bash
+    npm install
+    # or
+    yarn install
+    
 
-# Mock Server (for testing)
-MOCK_SERVER_URL=http://localhost:3001
+3.  **Configure your platforms:**
+    Create a `.env` file in the root directory and add your API keys and platform-specific credentials. Refer to `config.example.json` for structure.
 
-# Publishing Configuration
-PUBLISH_CONCURRENCY=3
-```
+### Running the CLI
 
-### Getting API Credentials
+Use the `omni-distro` command followed by your desired action and platform flags.
 
-#### Dev.to
-1. Go to [Dev.to Settings](https://dev.to/settings/account)
-2. Generate an API key
-3. Add to `DEVTO_API_KEY`
+bash
+# Example: Publish a markdown file to Dev.to and Hashnode
+omni-distro publish --file ./my-post.md --platforms devto,hashnode
 
-#### Hashnode
-1. Visit [Hashnode Developer Settings](https://hashnode.com/settings/developer)
-2. Create a Personal Access Token
-3. Add to `HASHNODE_TOKEN`
 
-#### Medium
-1. Access [Medium Settings](https://medium.com/me/settings)
-2. Generate an Integration Token
-3. Add to `MEDIUM_INTEGRATION_TOKEN`
+--- 
 
-#### WordPress.com
-1. Visit [WordPress Apps](https://developer.wordpress.com/apps/)
-2. Create an application
-3. Generate access token
-4. Set `WP_ACCESS_TOKEN` and `WP_SITE`
+## Scripts
 
-#### Ghost
-1. Go to Ghost Admin > Settings > Integrations
-2. Generate Admin API Key
-3. Set `GHOST_ADMIN_API_KEY` and `GHOST_ADMIN_URL`
+| Script         | Description                                     |
+|----------------|-------------------------------------------------|
+| `npm run dev`  | Starts the development server (if applicable)   |
+| `npm run build`| Builds the production-ready CLI executable        |
+| `npm run lint` | Lints the codebase using Biome                  |
+| `npm run format`| Formats the codebase using Biome               |
+| `npm test`     | Runs unit and integration tests using Vitest    |
 
-#### Blogger
-1. Visit [Google Developer Console](https://console.developers.google.com/)
-2. Create OAuth credentials
-3. Set `BLOGGER_OAUTH_TOKEN` and `BLOGGER_BLOG_ID`
-
-#### Tumblr
-1. Go to [Tumblr OAuth Apps](https://www.tumblr.com/oauth/apps)
-2. Register an application
-3. Complete OAuth flow
-4. Set all `TUMBLR_*` variables
+--- 
 
-#### Wix
-1. Visit [Wix Developers](https://dev.wix.com/)
-2. Create an API token
-3. Set `WIX_API_TOKEN` and `WIX_SITE_ID`
-
-## 📝 Content Creation
+## Contributing
 
-### Post Format
+Contributions are welcome! Please follow these steps:
 
-Create posts in `content/posts/` with format: `YYYY-MM-DD-slug.md`
+1.  Fork the repository.
+2.  Create a new branch for your feature or fix (`git checkout -b feature/YourFeature`).
+3.  Make your changes and ensure they pass all tests and linting.
+4.  Commit your changes (`git commit -m 'Add some YourFeature'`).
+5.  Push to the branch (`git push origin feature/YourFeature`).
+6.  Open a Pull Request.
 
-```markdown
----
-title: "Your Post Title"
-date: "2024-01-15"
-description: "SEO-optimized description under 160 characters"
-tags: ["tag1", "tag2", "tag3"]
-slug: "your-post-slug"
-author: "Your Name"
----
-
-# Your post content in Markdown
+_Please refer to `.github/CONTRIBUTING.md` for detailed guidelines._
 
-## Introduction
+--- 
 
-Your content here...
+## License
 
-## Main Content
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). See the `LICENSE` file for more details.
 
-More content...
+--- 
 
-## Conclusion
-
-Final thoughts...
-
-[Internal link to another post](2024-01-20-another-post.html)
-```
-
-### Content Guidelines
-
-- **Length**: Minimum 800 words for SEO optimization
-- **Structure**: H1 title + 3+ H2 sections
-- **Links**: Include at least one internal link to another post
-- **SEO**: Start with a meta paragraph summarizing key points
-- **Originality**: All content must be original (no plagiarism)
-
-### Community Submissions
-
-Users can submit content via GitHub Issues:
-
-1. Create an issue with title "Submit a Post"
-2. Add content in the issue body
-3. Label the issue with "publish"
-4. The system automatically converts approved submissions to posts
-
-## 🔄 Publishing Platforms
-
-### Supported Platforms
-
-| Platform | Status | Features |
-|----------|--------|----------|
-| Dev.to | ✅ | Full API support, tags, canonical URLs |
-| Hashnode | ✅ | GraphQL API, publications, custom domains |
-| Medium | ✅ | Integration tokens, publications |
-| WordPress | ✅ | REST API, categories, custom fields |
-| Ghost | ✅ | Admin API, custom themes |
-| Blogger | ✅ | Google API, blog management |
-| Tumblr | ✅ | OAuth, multiple post types |
-| Wix | ✅ | Headless Blog API, rich content |
-
-### Publishing Modes
-
-#### Dry Run Mode
-```bash
-npm run publish -- --dry-run
-```
-- Validates configuration
-- Simulates publishing without API calls
-- Shows what would be published
-
-#### Mock Mode
-```bash
-npm run publish -- --mock
-```
-- Uses local mock server
-- Tests publishing logic safely
-- No external API calls
-
-#### Production Mode
-```bash
-npm run publish
-```
-- Publishes to all configured platforms
-- Updates `.postmap.json` tracking
-- Generates detailed logs
-
-### Concurrency Control
-
-Control parallel publishing with:
-```bash
-PUBLISH_CONCURRENCY=2 npm run publish
-```
+## Star ⭐ This Repo
 
-## 🚀 GitHub Actions
-
-### Automated Workflows
-
-#### Site Deployment (`deploy-site.yml`)
-- **Trigger**: Push to main branch
-- **Actions**: Build site, deploy to GitHub Pages
-- **URL**: `https://your-username.github.io/omni-publisher-content-ecosystem`
+If you find this project useful, please consider starring it on GitHub! Your support helps the project grow.
 
-#### Scheduled Publishing (`publish-sync.yml`)
-- **Trigger**: Daily at 2 AM UTC or manual dispatch
-- **Actions**: Build, publish to platforms, update mappings
-- **Artifacts**: Detailed logs and error reports
-
-#### Issue-to-Post (`issue-to-post.yml`)
-- **Trigger**: Issues labeled "publish"
-- **Actions**: Convert issues to posts (allowlist only)
-- **Moderation**: Unapproved submissions go to drafts
-
-### Setting up GitHub Secrets
-
-Add these secrets in your repository settings:
-
-```bash
-DEVTO_API_KEY=your_key
-HASHNODE_TOKEN=your_token
-MEDIUM_INTEGRATION_TOKEN=your_token
-WP_ACCESS_TOKEN=your_token
-WP_SITE=your_site
-GHOST_ADMIN_API_KEY=your_key
-GHOST_ADMIN_URL=your_url
-BLOGGER_OAUTH_TOKEN=your_token
-BLOGGER_BLOG_ID=your_id
-TUMBLR_CONSUMER_KEY=your_key
-TUMBLR_CONSUMER_SECRET=your_secret
-TUMBLR_TOKEN=your_token
-TUMBLR_TOKEN_SECRET=your_secret
-TUMBLR_BLOG_IDENTIFIER=your_blog
-WIX_API_TOKEN=your_token
-WIX_SITE_ID=your_id
-PUBLISH_CONCURRENCY=3
-```
-
-## 🧪 Testing
-
-### Running Tests
-
-```bash
-# Run complete test suite
-npm test
-
-# Test individual components
-npm run mock-server
-npm run publish -- --mock --dry-run
-```
-
-### Test Coverage
-
-The test suite validates:
-- ✅ Mock server functionality
-- ✅ TypeScript compilation
-- ✅ Publisher execution
-- ✅ Post mapping creation
-- ✅ Logging system
-- ✅ Error handling
-
-### Manual Testing
-
-Test API endpoints directly:
-
-```bash
-# Health check
-curl http://localhost:3001/health
-
-# Test Dev.to endpoint
-curl -X POST http://localhost:3001/devto/api/articles \
-  -H "Content-Type: application/json" \
-  -d '{"article":{"title":"Test","body_markdown":"Test content"}}'
-```
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-#### 401/403 Authentication Errors
-
-**Symptoms**: API calls failing with authentication errors
-
-**Solutions**:
-1. Verify API keys are correct and not expired
-2. Check token scopes and permissions
-3. Ensure environment variables are loaded
-4. Test credentials manually via API documentation
-
-#### Rate Limiting
-
-**Symptoms**: 429 errors from platforms
-
-**Solutions**:
-1. Reduce `PUBLISH_CONCURRENCY`
-2. Add delays between requests
-3. Check platform-specific rate limits
-4. Implement exponential backoff
-
-#### Build Failures
-
-**Symptoms**: TypeScript compilation errors
-
-**Solutions**:
-1. Run `npm install` to update dependencies
-2. Check Node.js version (requires 18+)
-3. Clear `node_modules` and reinstall
-4. Verify `tsconfig.json` settings
-
-#### Publishing Skips
-
-**Symptoms**: Posts not publishing to some platforms
-
-**Solutions**:
-1. Check environment variables for missing keys
-2. Review platform-specific error logs
-3. Verify API endpoints are accessible
-4. Test individual platform APIs manually
-
-### Debug Mode
-
-Enable detailed logging:
-
-```bash
-DEBUG=* npm run publish
-```
-
-### Log Analysis
-
-Check generated logs in `logs/` directory:
-- `publish-YYYY-MM-DD.log` - Daily publishing logs
-- Contains platform-specific success/failure details
-- Includes API response data for debugging
-
-## 🔒 Security
-
-### API Key Management
-
-- Never commit API keys to version control
-- Use GitHub Secrets for CI/CD
-- Rotate keys regularly
-- Monitor API usage for anomalies
-
-### Content Moderation
-
-- Review community submissions before publishing
-- Use allowlist system for trusted contributors
-- Implement content filters for spam prevention
-- Regular security audits of generated content
-
-### Platform Security
-
-- Use HTTPS for all API communications
-- Implement proper error handling
-- Avoid logging sensitive data
-- Regular dependency updates
-
-## 🤝 Contributing
-
-### Development Setup
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
-
-### Adding New Platforms
-
-1. Create adapter in `src/adapters/`
-2. Implement required interface methods
-3. Add environment variables to `.env.example`
-4. Update mock server endpoints
-5. Add platform to test suite
-
-### Content Guidelines
-
-- Follow existing post format
-- Ensure SEO optimization
-- Include internal linking
-- Test publishing to all platforms
-
-## 📄 License
-
-MIT License - see LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Platform APIs and documentation
-- Open source community
-- Content creators and contributors
-
----
-
-**Ready to amplify your content reach?** Start publishing across multiple platforms with Omni-Publisher today!
+[<img src="https://img.shields.io/github/stars/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI?style=social&label=Star" alt="GitHub Stars">](https://github.com/chirag127/OmniDistro-Content-Publishing-Engine-TypeScript-CLI/stargazers)
