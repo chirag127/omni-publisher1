@@ -1,0 +1,84 @@
+name: OmniDistro CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+# Apex Standard CI/CD Workflow for TypeScript CLI Projects (2025 Standard)
+# Focuses on Speed (npm/yarn/pnpm cache), Strict Linting (Biome), and Comprehensive Testing (Vitest/Playwright).
+
+jobs:
+  build_and_test:
+    name: Build, Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Target stable LTS
+        cache: 'npm'
+        cache-dependency-path: 'package-lock.json'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Verify TypeScript Configuration and Linting (Biome Check)
+      run: npm run lint
+
+    - name: Run Unit Tests (Vitest)
+      run: npm run test:unit
+
+    - name: Generate Code Coverage Report
+      run: npm run test:coverage
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage/lcov.info
+        flags: unittests
+
+    - name: Build Project Artifacts
+      run: npm run build
+
+  # Integration testing would be required here if E2E was defined, but for a CLI, focus on robust unit/integration.
+  # If Playwright was added later, a separate 'e2e' job would run here.
+
+  deploy:
+    name: Release (Semantic Versioning)
+    needs: build_and_test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required for creating release/tag
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Required for correct git history for semantic-release
+
+    - name: Setup Node.js Environment for Release
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Semantic Release Tools
+      run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/npm
+
+    - name: Configure Git User for Commit/Tagging
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+
+    - name: Semantic Release
+      env:
+        # Assumes NPM_TOKEN is configured for publishing if this were an npm package
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: semantic-release
